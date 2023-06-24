@@ -1,7 +1,7 @@
 const { VantResolver } = require('unplugin-vue-components/resolvers');
 const ComponentsPlugin = require('unplugin-vue-components/webpack');
 module.exports = {
-  // 解决lint报错
+  // 不检测
   lintOnSave: false,
   css: {
 
@@ -11,7 +11,7 @@ module.exports = {
 
         plugins: [
 
-          require('postcss-pxtorem')({ rootValue: 16, propList: ['*'] }),
+          require('postcss-pxtorem')({ rootValue: 37.5, propList: ['*'] }),
 
         ],
 
