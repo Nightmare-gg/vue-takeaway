@@ -1,4 +1,4 @@
-import { createRouter,createWebHashHistory } from "vue-router";
+import { createRouter, createWebHashHistory } from "vue-router";
 
 const router = createRouter({
     // 路由跳转方式
@@ -6,19 +6,23 @@ const router = createRouter({
     routes: [
         {
             path: '/',
-            component:()=> import('../views/home')
+            component: () => import('../views/home')
+        },
+        {
+            path: '/home',
+            component: () => import('../views/home')
         },
         {
             path: '/cart',
-            component:()=> import('../views/cart')
+            component: () => import('../views/cart')
         },
         {
             path: '/mine',
-            component: ()=> import('../views/mine')
+            component: () => import('../views/mine')
         },
         {
             path: '/order',
-            component: ()=> import('../views/order')
+            component: () => import('../views/order')
         }
     ]
 })

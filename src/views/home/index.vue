@@ -1,16 +1,21 @@
 <template>
     <div class="home">
-        <h3>首页</h3>
+        <div class="content">主体内容</div>
+        <Footer></Footer>
     </div>
-    <van-button type="primary">点击</van-button>
-    </template>
+</template>
     
-    <script setup>
-    </script>
-    <style scoped lang="less">
-    .home {
-        h3{
-            color: red;
-        }
+<script setup>
+import Footer from '../../components/Footer.vue'
+</script>
+<style scoped lang="less">
+.home {
+    display: flex;
+    flex-flow: column;
+    height: 100%;
+
+    .content {
+        flex: 1;
     }
-    </style>
+}
+</style>

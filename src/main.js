@@ -1,10 +1,9 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import './assets/reset.css'
+import './assets/base.less'
 import 'amfe-flexible';
 import router from './router/index'
-import { Button } from 'vant';
 
 const app = createApp(App)
-app.use(router).use(Button)
+app.use(router)
 app.mount('#app')
