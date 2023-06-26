@@ -18,8 +18,22 @@
                         <div class="search-text">搜索</div>
                     </div>
                     <div class="sort">
-                        <div class="big-sort"></div>
-                        <div class="small-sort"></div>
+                        <div class="big-sort">
+                            <div v-for="(item, index) in big_sort " :key="index">
+                                <svg class="icon" aria-hidden="true">
+                                    <use :xlink:href="`#${item.icon}`"></use>
+                                </svg>
+                                {{ item.name }}
+                            </div>
+                        </div>
+                        <div class="small-sort">
+                            <div v-for="(item, index) in small_sort " :key="index">
+                                <svg class="icon" aria-hidden="true">
+                                    <use :xlink:href="`#${item.icon}`"></use>
+                                </svg>
+                                {{ item.name }}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -30,12 +44,80 @@
     
 <script setup>
 import Footer from '../../components/Footer.vue'
+import { reactive } from 'vue';
+let big_sort = reactive(
+    [
+        {
+            name: "美食",
+            icon: "icon-meishi",
+        },
+        {
+            name: "甜点饮品",
+            icon: "icon-tiandian",
+        },
+        {
+            name: "超市便利",
+            icon: "icon-chaoshigouwu",
+        },
+        {
+            name: "生鲜果蔬",
+            icon: "icon-shengxian-ganju",
+        },
+        {
+            name: "买药",
+            icon: "icon-zhichiyiyuanyaodian",
+        },
+    ])
+let small_sort = reactive(
+    [
+        {
+            name: "午餐",
+            icon: "icon-wucan",
+        },
+        {
+            name: "买酒",
+            icon: "icon-jiu",
+        },
+        {
+            name: "新鲜水果",
+            icon: "icon-xinxianguoshu_xinxianshuiguopingguo",
+        },
+        {
+            name: "汉堡披萨",
+            icon: "icon-hanbaopisa",
+        },
+        {
+            name: "休闲饮品",
+            icon: "icon-xiuxianyinpin",
+        },
+        {
+            name: "夜宵",
+            icon: "icon-yexiao",
+        },
+        {
+            name: "吐司",
+            icon: "icon-tusi",
+        },
+        {
+            name: "跑腿",
+            icon: "icon-paotuiAPP",
+        },
+        {
+            name: "美人佳丽",
+            icon: "icon-kouhong",
+        },
+        {
+            name: "全部分类",
+            icon: "icon-fenlei",
+        },
+    ])
 </script>
 <style scoped lang="less">
 .home {
     display: flex;
     flex-flow: column;
     height: 100%;
+    font-size: 12px;
 
     .content {
         flex: 1;
@@ -91,6 +173,49 @@ import Footer from '../../components/Footer.vue'
                         font-size: 14px;
                         text-align: center;
                         border-radius: 16px;
+                    }
+                }
+
+                .sort {
+                    padding: 20px 0;
+
+
+                    .big-sort {
+                        display: flex;
+
+                        div {
+                            display: flex;
+                            flex-direction: column;
+                            justify-content: center;
+                            align-items: center;
+                            flex: 1;
+
+                            .icon {
+                                width: 50px;
+                                height: 50px;
+                                margin-bottom: 5px;
+                            }
+                        }
+                    }
+
+                    .small-sort {
+                        display: flex;
+                        flex-wrap: wrap;
+                        margin-top: 20px;
+
+                        div {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            justify-content: center;
+                            width: 20%;
+
+                            .icon {
+                                width: 30px;
+                                height: 30px;
+                                margin: 10px;
+                            }
+                        }
                     }
                 }
             }
