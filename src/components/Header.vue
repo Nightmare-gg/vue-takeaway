@@ -1,11 +1,13 @@
 <template>
     <div class="header">
-        <van-icon class="icon" name="arrow-left" />
+        <van-icon class="icon" name="arrow-left" @click="router.back()" />
         <div>{{ props.title }}</div>
     </div>
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const props = defineProps({
     title: String
 })

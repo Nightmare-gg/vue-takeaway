@@ -4,7 +4,7 @@ import './assets/base.less'
 import 'amfe-flexible';
 import router from './router/index'
 import store from './store'
-
+import 'vant/es/toast/style';
 const app = createApp(App)
 app.use(router).use(store)
 app.mount('#app')
