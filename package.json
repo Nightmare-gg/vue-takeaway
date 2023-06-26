@@ -15,7 +15,8 @@
     "postcss-pxtorem": "^5.1.1",
     "vant": "^3.4.3",
     "vue": "^3.0.0",
-    "vue-router": "^4.2.2"
+    "vue-router": "^4.2.2",
+    "vuex": "^4.0.2"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.17",

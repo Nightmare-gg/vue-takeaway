@@ -64,7 +64,7 @@ const handleChange = (value, detail) => {
             item.num = value;
         }
     })
-    console.log(data.subItem);
+    // console.log(data.subItem);
 }
 </script>
 <style scoped lang="less">
