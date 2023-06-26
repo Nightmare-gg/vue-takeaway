@@ -1,5 +1,5 @@
 <template>
-    <div class="item">
+    <div class="item" @click="toStore">
         <img :src="props.itemContent.pic" />
         <div class="item-right">
             <div class="title">{{ props.itemContent.title }}</div>
@@ -15,6 +15,8 @@
 </template>
 
 <script setup>
+import { useRouter } from 'vue-router';
+// 接收父组件传过来的数据
 const props = defineProps({
     itemContent: {
         type: Object,
@@ -22,6 +24,11 @@ const props = defineProps({
     }
 })
 
+// 跳转路由
+const router = useRouter()
+const toStore = () => {
+    router.push('/store')
+}
 </script>
 <style scoped lang="less">
 .item {
