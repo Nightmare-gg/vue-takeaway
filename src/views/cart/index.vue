@@ -1,7 +1,7 @@
 <template>
     <div class="cart">
-        <Header title="购物车" />
-        <CartDetail v-if="isShow" />
+        <Header title="购物车" :edit="true" />
+        <CartDetail v-if="isShow" :changeShow="changeShow" />
         <Empty v-else />
         <Footer />
     </div>
@@ -21,6 +21,10 @@ const init = () => {
     if (store.state.cartList.length === 0) {
         isShow.value = false
     }
+}
+
+const changeShow = () => {
+    isShow.value = false
 }
 
 onMounted(() => {

@@ -7,20 +7,26 @@
                 </div>
             </van-checkbox-group>
         </div>
-        <van-submit-bar :price="allPrice" button-text="提交订单" @submit="onSubmit" class="submit-all" buttonColor="#ffc400">
+        <van-submit-bar :price="allPrice" button-text="结算" @submit="onSubmit" class="submit-all" buttonColor="#ffc400"
+            v-if="store.state.isDelete">
             <van-checkbox v-model="submitChecked" checkedColor="#ffc400" @click="choseAll">全选</van-checkbox>
         </van-submit-bar>
-
+        <div class="buy" v-else>
+            <van-checkbox v-model="submitChecked" checkedColor="#ffc400" @click="choseAll">全选</van-checkbox>
+            <div class="delete" @click="handleDelete">
+                删除
+            </div>
+        </div>
     </div>
 </template>
 
 <script setup>
 import ListItem from '../../../components/ListItem.vue';
 import { useStore } from 'vuex'
-import { reactive, ref } from 'vue';
-import { onMounted } from 'vue';
-import { computed } from 'vue';
+import { reactive, ref, onMounted, computed } from 'vue';
+import { Toast } from 'vant';
 
+const props = defineProps(["changeShow"])
 const store = useStore()
 const checked = ref([]);
 const submitChecked = ref(true)
@@ -59,15 +65,37 @@ const groupChange = (result) => {
 }
 // 计算单价 vant中 submit以分为单位所以乘100
 const allPrice = computed(() => {
-    let countList = store.state.cartList.filter((item) => {
-        return checked.value.includes(item.id)
-    })
+    let countList = updateData()
     let sum = 0
     countList.forEach((item) => {
         sum += item.num * item.price;
     })
     return sum * 100
 })
+
+const updateData = (type) => {
+    return store.state.cartList.filter((item) => {
+        return type === "delete"
+            ? !checked.value.includes(item.id)
+            : checked.value.includes(item.id)
+    })
+}
+
+// 删除商品
+const handleDelete = () => {
+    // 判断checked是否有值（是否有商品被选中）
+    if (checked.value.length) {
+        store.commit("delete", updateData("delete"))
+        checked.value = []
+        // 购物车中没有数据的时候
+        if (!store.state.cartList.length) {
+            props.changeShow()
+            store.commit('edit', 'delete')
+        }
+    } else {
+        Toast.fail("请选择要删除的商品");
+    }
+}
 
 onMounted(() => {
     init()

@@ -3,7 +3,7 @@
         <svg class="icon" aria-hidden="true">
             <use xlink:href="#icon-inbox"></use>
         </svg>
-        啥也没有
+        空空如也
     </div>
 </template>
 
