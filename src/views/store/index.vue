@@ -28,82 +28,22 @@
 
 <script setup>
 import FoodList from './childComp/FoodList.vue'
-import { reactive, ref } from 'vue';
+import { reactive, ref, onMounted } from 'vue';
 import { useStore } from 'vuex'
 import { useRouter } from 'vue-router'
 import Header from '../../components/Header.vue';
 import { Toast } from 'vant';
+// import axios from 'axios'
+import { getApiStoreData } from '../../api/api';
+
 const title = ref("鱼拿酸菜鱼")
 const img = ref("https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440")
-const storeData = reactive([
-    {
-        name: "点菜",
-        data: {
-            content: "点菜",
-            items: [
-                {
-                    text: "热销套餐",
-                    children: [
-                        {
-                            pic: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.cfcy168.com%2FUploadFiles%2F2020%2F2%2F15904074889874037.jpg&refer=http%3A%2F%2Fwww.cfcy168.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645421933&t=66b58fbba9dce6f6b397e38820de24dc",
-                            title: "隆江猪脚饭",
-                            num: 0,
-                            price: 25.0,
-                            id: 0,
-                            add: true,
-                        },
-                        {
-                            pic: "https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fwww.cfcy168.com%2FUploadFiles%2F2020%2F2%2F15904074889874037.jpg&refer=http%3A%2F%2Fwww.cfcy168.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=jpeg?sec=1645421933&t=66b58fbba9dce6f6b397e38820de24dc",
-                            title: "隆江猪脚饭",
-                            num: 0,
-                            price: 25.0,
-                            id: 1,
-                            add: true,
-                        },
-                    ],
-                },
-                {
-                    text: "超级折扣",
-                    children: [
-                        {
-                            pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
-                            title: "无骨酸菜鱼+肥牛双拼",
-                            num: 0,
-                            price: 25.0,
-                            id: 5,
-                            add: true,
-                        },
-                        {
-                            pic: "https://img1.baidu.com/it/u=1599947592,1695977044&fm=253&fmt=auto&app=138&f=JPEG?w=640&h=440",
-                            title: "香辣水煮鱼+肥牛双拼",
-                            num: 0,
-                            price: 25.0,
-                            id: 6,
-                            add: true,
-                        },
-                    ],
-                },
-            ],
-        },
-    },
-    {
-        name: "评价",
-        data: {
-            content: "评价",
-        },
-    },
-    {
-        name: "商家",
-        data: {
-            content: "商家",
-        },
-    },
-])
+const storeData = ref([])
 const store = useStore()
 const router = useRouter()
 const handleAddCart = (type) => {
     const newList = store.state.cartList || []
-    storeData.forEach((item) => {
+    storeData.value.forEach((item) => {
         item.data.items?.forEach((item) => {
             item.children.forEach((item) => {
                 if (item.num > 0) {
@@ -127,6 +67,25 @@ const goCart = () => {
 const goBuy = () => {
     handleAddCart("buy")
 }
+
+const getStoreData = () => {
+    getApiStoreData().then((res) => {
+        // console.log(res);
+        storeData.value = res
+    })
+    // axios.get('/home/getStoreData').then((res) => {
+    //     console.log(res);
+    //     const { storeDatas, code } = res.data;
+    //     if (code == 200) {
+    //         storeData.value = storeDatas
+    //     }
+    // })
+}
+
+onMounted(() => {
+    getStoreData()
+})
+
 </script>
 <style scoped lang="less">
 .storeDetails {

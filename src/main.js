@@ -6,6 +6,7 @@ import router from './router/index'
 import store from './store'
 import 'vant/es/toast/style';
 import 'vant/es/dialog/style';
+import './api/mock'
 const app = createApp(App)
 app.use(router).use(store)
 app.mount('#app')
