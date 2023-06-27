@@ -39,7 +39,12 @@ const router = createRouter({
         {
             path: '/addressedit',
             component: () => import('../views/addressEdit')
+        },
+        {
+            path: '/userinfoedit',
+            component: () => import('../views/userinfoedit')
         }
+
     ]
 })
 
