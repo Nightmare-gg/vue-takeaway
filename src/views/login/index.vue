@@ -24,6 +24,7 @@
 import Header from '../../components/Header.vue';
 import { useRouter } from 'vue-router';
 import { ref } from 'vue'
+import { Toast } from 'vant'
 
 const router = useRouter()
 const username = ref('')
@@ -32,10 +33,26 @@ const toRegister = () => {
     router.push('./register')
 }
 
-
-const onSubmit = () => {
-
-}
+const onSubmit = (value) => {
+    if (!localStorage.userInfo) {
+        Toast("账号未注册");
+        return;
+    } else {
+        let userInfo = JSON.parse(localStorage.userInfo);
+        if (userInfo["user"] === value["user"]) {
+            if (userInfo["pass"] === value["pass"]) {
+                Toast("登录成功");
+                // 存储标识
+                localStorage.setItem("isLogin", "login")
+                router.push("/home")
+            } else {
+                Toast("密码错误")
+            }
+        } else {
+            Toast("账号不存在")
+        }
+    }
+};
 </script>
 <style scoped lang="less">
 .login {

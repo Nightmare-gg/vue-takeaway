@@ -11,7 +11,7 @@
                 <van-button round block type="info" native-type="submit" color="#ffc400">
                     注册
                 </van-button>
-                <van-button round block type="info" color="#ffc400" class="register" @click="toRegister">
+                <van-button round block type="info" color="#ffc400" class="register" @click="toLogin">
                     去登录
                 </van-button>
             </div>
@@ -23,18 +23,33 @@
 <script setup>
 import Header from '../../components/Header.vue';
 import { useRouter } from 'vue-router';
-import { ref } from 'vue'
+import { ref } from 'vue';
+import { Toast } from 'vant'
 
 const router = useRouter()
 const username = ref('')
 const password = ref('')
-const toRegister = () => {
+const toLogin = () => {
     router.push('./login')
 }
 
 
-const onSubmit = () => {
-
+const onSubmit = (value) => {
+    if (localStorage.userInfo) {
+        let userInfo = JSON.parse(localStorage.getItem("userInfo"));
+        if (userInfo["user"] === value["user"]) {
+            Toast("该用户已存在");
+            return
+        }
+    } else {
+        register(value)
+    }
+}
+// 将数据存储在本地
+const register = (value) => {
+    localStorage.setItem("userInfo", JSON.stringify(value));
+    Toast("注册成功")
+    toLogin()
 }
 </script>
 <style scoped lang="less">

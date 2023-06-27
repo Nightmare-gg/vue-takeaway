@@ -1,4 +1,5 @@
 import { createRouter, createWebHashHistory } from "vue-router";
+import { Toast } from "vant";
 
 const router = createRouter({
     // 路由跳转方式
@@ -14,15 +15,24 @@ const router = createRouter({
         },
         {
             path: '/cart',
-            component: () => import('../views/cart')
+            component: () => import('../views/cart'),
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/mine',
-            component: () => import('../views/mine')
+            component: () => import('../views/mine'),
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/order',
-            component: () => import('../views/order')
+            component: () => import('../views/order'),
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/store',
@@ -34,15 +44,24 @@ const router = createRouter({
         },
         {
             path: '/address',
-            component: () => import('../views/address')
+            component: () => import('../views/address'),
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/addressedit',
-            component: () => import('../views/addressEdit')
+            component: () => import('../views/addressEdit'),
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/userinfoedit',
-            component: () => import('../views/userinfoedit')
+            component: () => import('../views/userinfoedit'),
+            meta: {
+                isAuth: true
+            }
         },
         {
             path: '/login',
@@ -56,4 +75,18 @@ const router = createRouter({
     ]
 })
 
+// 路由守卫
+router.beforeEach((to, from, next) => {
+    if (to.meta.isAuth) {
+        // 一会登录以后，会在localstorage里面存储一个标识
+        if (localStorage.isLogin === 'login') {
+            next()
+        } else {
+            next('/login')
+            Toast("请先登录！")
+        }
+    } else {
+        next()
+    }
+})
 export default router
