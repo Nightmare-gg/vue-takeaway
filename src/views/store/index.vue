@@ -102,7 +102,7 @@ const storeData = reactive([
 const store = useStore()
 const router = useRouter()
 const handleAddCart = (type) => {
-    const newList = []
+    const newList = store.state.cartList || []
     storeData.forEach((item) => {
         item.data.items?.forEach((item) => {
             item.children.forEach((item) => {

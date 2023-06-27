@@ -1,6 +1,7 @@
 <template>
     <div class="content-item">
         <div class="left">
+            <van-checkbox :name="item.id" v-if="showCheckBox" checked-color="#ffc400" />
             <!-- 动态数据前面要加: -->
             <img :src="item.pic" alt="" />
         </div>
@@ -17,7 +18,7 @@
 </template>
 
 <script setup>
-defineProps(["item", "handleAdd", "handleChange"])
+defineProps(["item", "handleAdd", "handleChange", "showCheckBox"])
 
 
 </script>

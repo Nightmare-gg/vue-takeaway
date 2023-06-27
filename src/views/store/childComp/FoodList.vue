@@ -4,7 +4,7 @@
             @click-nav="navClick">
             <template #content>
                 <div class="item-bg" v-for="(item, index) in data.subItem">
-                    <food-list-item :item="item" :handleAdd="handleAdd" :handleChange="handleChange" />
+                    <List-item :item="item" :handleAdd="handleAdd" :handleChange="handleChange" />
                 </div>
             </template>
         </van-tree-select>
@@ -17,7 +17,7 @@
 </template>
 
 <script setup>
-import FoodListItem from './FoodListItem.vue'
+import ListItem from '../../../components/ListItem.vue';
 import { reactive } from 'vue';
 
 const props = defineProps({
