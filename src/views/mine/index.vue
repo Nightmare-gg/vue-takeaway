@@ -16,6 +16,7 @@ import Footer from '../../components/Footer.vue'
     display: flex;
     flex-flow: column;
     height: 100%;
+    font-size: 12px;
 
     .content {
         flex: 1;

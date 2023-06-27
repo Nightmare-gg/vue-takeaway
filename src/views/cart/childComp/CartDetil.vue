@@ -23,11 +23,13 @@
 <script setup>
 import ListItem from '../../../components/ListItem.vue';
 import { useStore } from 'vuex'
+import { useRouter } from 'vue-router';
 import { reactive, ref, onMounted, computed } from 'vue';
 import { Toast } from 'vant';
 
 const props = defineProps(["changeShow"])
 const store = useStore()
+const router = useRouter()
 const checked = ref([]);
 const submitChecked = ref(true)
 const handleChange = (value, detail) => {
@@ -43,7 +45,17 @@ const init = () => {
 }
 
 const onSubmit = () => {
-
+    if (checked.value.length) {
+        store.commit("pay", updateData())
+        router.push({
+            path: "/createorder",
+            query: {
+                list: checked.value
+            }
+        })
+    } else {
+        Toast.fail("请选择要结算的商品！！！")
+    }
 }
 // 底部全选
 const choseAll = () => {
