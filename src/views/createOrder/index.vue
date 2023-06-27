@@ -32,7 +32,7 @@ const tel = ref("13878654321")
 const name = ref("李四")
 const totalPrice = ref(0)
 const onEdit = () => {
-
+    router.push('/address')
 }
 const initPrice = () => {
     let price = 0

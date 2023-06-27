@@ -62,6 +62,39 @@ export default createStore({
         },
         orderListEd(state) {
             state.orderListEnd = state.orderListEnd.concat(state.orderList)
+        },
+        // 新增地址
+        addAddress(state, value) {
+            state.userAddress.map((item) => {
+                if (value.isDefault) {
+                    item.isDefault = false
+                }
+            })
+            state.userAddress.push(value)
+        },
+        // 编辑地址
+        editAddress(state, value) {
+            state.userAddress = state.userAddress.map((item) => {
+                if (value.isDefault) {
+                    item.isDefault = false
+                }
+                // if (item.id === value.id) {
+                //     return value
+                // } else {
+                //     return item
+                // }
+                return item.id === value.id ? value : item
+            })
+        },
+        // 删除地址
+        deleteAddress(state, value) {
+            state.userAddress = state.userAddress.filter(item => {
+                return !(item.id === value.id)
+            })
+            // 如果删除的是默认值，则将删除后的第一个设为默认值
+            if (value.isDefault) {
+                state.userAddress[0].isDefault = true
+            }
         }
     },
     actions: {}

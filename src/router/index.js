@@ -31,6 +31,14 @@ const router = createRouter({
         {
             path: '/createorder',
             component: () => import('../views/createOrder')
+        },
+        {
+            path: '/address',
+            component: () => import('../views/address')
+        },
+        {
+            path: '/addressedit',
+            component: () => import('../views/addressEdit')
         }
     ]
 })
