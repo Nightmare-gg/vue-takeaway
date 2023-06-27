@@ -43,6 +43,14 @@ const router = createRouter({
         {
             path: '/userinfoedit',
             component: () => import('../views/userinfoedit')
+        },
+        {
+            path: '/login',
+            component: () => import('../views/login')
+        },
+        {
+            path: '/register',
+            component: () => import('../views/register')
         }
 
     ]
